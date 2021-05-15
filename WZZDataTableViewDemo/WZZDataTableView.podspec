@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "WZZDataTableView"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "WZZDataTableView是一个数据驱动的tableview"
 
   # This description is used to generate tags and improve search results.
@@ -103,6 +103,7 @@ Pod::Spec.new do |s|
   #  non-essential files like tests, examples and documentation.
   #
 
+  s.resources = "WZZDataTableViewDemo/WZZDataTableView/*.xib"
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
 
