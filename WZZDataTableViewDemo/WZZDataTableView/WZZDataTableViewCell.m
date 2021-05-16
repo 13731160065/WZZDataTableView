@@ -14,12 +14,28 @@
 @property (nonatomic, weak) id<UITextFieldDelegate> tfDelegate;
 @property (nonatomic, weak) id<UITextViewDelegate> tvDelegate;
 
+@property (nonatomic, strong) UIButton * upButton;
+
 @end
 
 @implementation WZZDataTableViewCell
 
 - (void)setup {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.upButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self addSubview:self.upButton];
+    self.upButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint constraintWithItem:self.upButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:0].active = YES;
+    [NSLayoutConstraint constraintWithItem:self.upButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1 constant:0].active = YES;
+    [NSLayoutConstraint constraintWithItem:self.upButton attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1 constant:0].active = YES;
+    [NSLayoutConstraint constraintWithItem:self.upButton attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeRight multiplier:1 constant:0].active = YES;
+    [self.upButton addTarget:self action:@selector(upClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)upClick {
+    if (self.model.onClick) {
+        self.model.onClick(self.model);
+    }
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -42,7 +58,7 @@
 
 - (void)cellWithModel:(WZZDataTableViewModel *)model {
     _model = model;
-    
+    self.upButton.hidden = !model.onClick;
 }
 
 #pragma mark - 绑定输入

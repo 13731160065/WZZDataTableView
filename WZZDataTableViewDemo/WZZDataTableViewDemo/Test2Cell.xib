@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,6 +18,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ly2-7Y-Xze">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVB-XD-N5Q">
                         <rect key="frame" x="15" y="0.0" width="290" height="44"/>
                         <subviews>
@@ -49,8 +54,12 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="WVB-XD-N5Q" secondAttribute="trailing" constant="15" id="1AY-Ec-ONq"/>
                     <constraint firstItem="WVB-XD-N5Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7PL-hW-Nct"/>
+                    <constraint firstAttribute="trailing" secondItem="ly2-7Y-Xze" secondAttribute="trailing" id="YXK-SP-COy"/>
                     <constraint firstAttribute="bottom" secondItem="WVB-XD-N5Q" secondAttribute="bottom" id="aJA-Cf-s2Y"/>
+                    <constraint firstItem="ly2-7Y-Xze" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ach-df-hbP"/>
                     <constraint firstItem="WVB-XD-N5Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="go2-Vf-BNW"/>
+                    <constraint firstAttribute="bottom" secondItem="ly2-7Y-Xze" secondAttribute="bottom" id="rTi-xV-Bct"/>
+                    <constraint firstItem="ly2-7Y-Xze" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wUF-bk-pDb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
@@ -60,4 +69,9 @@
             <point key="canvasLocation" x="-62.318840579710148" y="108.48214285714285"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

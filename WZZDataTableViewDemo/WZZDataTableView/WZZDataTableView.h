@@ -14,10 +14,11 @@
 
 @property (strong, nonatomic) UITableView * tableView;
 
-/**
- cell复用，返回cell则覆盖原本的cell
- */
-@property (strong, nonatomic) UITableViewCell *(^cellForRowAtIndexPath)(UITableView * tableView, UITableViewCell * cell, NSIndexPath * indexPath);
+/// 设置tableView代理
+@property (nonatomic, weak) id<UITableViewDelegate> delegate;
+
+/// 设置tableView数据源
+@property (nonatomic, weak) id<UITableViewDataSource> dataSource;
 
 /**
  注册cell

@@ -7,10 +7,12 @@
 //
 
 #import "WZZDataTableView.h"
+#import <objc/runtime.h>
 
 @interface WZZDataTableView ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray <WZZDataTableViewModel *>* dataArrf;
+@property (strong, nonatomic) NSMutableArray <NSMutableDictionary *>* sectionDataArr;
 
 @end
 
@@ -52,6 +54,8 @@
     [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.tableView attribute:NSLayoutAttributeBottom multiplier:1 constant:0].active = YES;
     [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.tableView attribute:NSLayoutAttributeLeft multiplier:1 constant:0].active = YES;
     [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.tableView attribute:NSLayoutAttributeRight multiplier:1 constant:0].active = YES;
+    
+    self.tableView.estimatedRowHeight = 44;
 }
 
 - (void)registerCell:(Class)cellClass model:(Class)modelClass {
@@ -68,6 +72,29 @@
 }
 
 - (void)reloadData {
+    self.sectionDataArr = [NSMutableArray array];
+    NSMutableArray * currentArr;
+    for (int i = 0; i < self.dataArrf.count; i++) {
+        WZZDataTableViewModel * item = self.dataArrf[i];
+        
+        if (item.isSectionHeader) {
+            NSMutableDictionary * hh = [NSMutableDictionary dictionary];
+            hh[@"header"] = item;
+            currentArr = [NSMutableArray array];
+            hh[@"dataArr"] = currentArr;
+            [self.sectionDataArr addObject:hh];
+            continue;
+        } else {
+            if (i == 0) {
+                NSMutableDictionary * hh = [NSMutableDictionary dictionary];
+                currentArr = [NSMutableArray array];
+                hh[@"dataArr"] = currentArr;
+                [self.sectionDataArr addObject:hh];
+            }
+        }
+        
+        [currentArr addObject:item];
+    }
     [self.tableView reloadData];
 }
 
@@ -77,36 +104,89 @@
 
 #pragma mark - tableview代理
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger numm = 1;
+    if (self.sectionDataArr.count == 0) {
+        NSArray * aaa = self.sectionDataArr.firstObject[@"dataArr"];
+        if (aaa.count == 0) {
+            numm = 0;
+        }
+    }
+    if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]) {
+        [self.dataSource numberOfSectionsInTableView:tableView];
+    }
+    return self.sectionDataArr.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    WZZDataTableViewModel * model = self.sectionDataArr[section][@"header"];
+    if ([self.delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
+        [self.delegate tableView:tableView heightForHeaderInSection:section];
+    }
+    return model.sectionHeaderHeight;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    WZZDataTableViewModel * model = self.sectionDataArr[section][@"header"];
+    WZZDataTableViewCell * cell;
+    if (model.sectionHeaderReuse) {
+        cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
+        [cell cellWithModel:model];
+    } else {
+        cell = objc_getAssociatedObject(model, "WZZDataTableViewModel_reuseSectionHeader");
+        if (!cell) {
+            cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
+            objc_setAssociatedObject(model, "WZZDataTableViewModel_reuseSectionHeader", cell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
+        [cell cellWithModel:model];
+    }
+    
+    if ([self.dataSource respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
+        [self.delegate tableView:tableView viewForHeaderInSection:section];
+    }
+
+    return cell;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArrf.count;
+    NSMutableArray * subArr = self.sectionDataArr[section][@"dataArr"];
+    if ([self.dataSource respondsToSelector:@selector(tableView:numberOfRowsInSection:)]) {
+        [self.dataSource tableView:tableView numberOfRowsInSection:section];
+    }
+    return subArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WZZDataTableViewModel * model = self.dataArrf[indexPath.row];
-    WZZDataTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
+    NSMutableArray * subArr = self.sectionDataArr[indexPath.section][@"dataArr"];
+    WZZDataTableViewModel * model = subArr[indexPath.row];
+    
+    NSString * cid = NSStringFromClass(model.class);
+    if (model.cellNoReuse) {
+        [cid stringByAppendingFormat:@"%zd,%zd", indexPath.section, indexPath.row];
+    }
+    WZZDataTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cid];
     
     [cell cellWithModel:model];
     [cell layoutIfNeeded];
     
-    if (self.cellForRowAtIndexPath) {
-        UITableViewCell * cell2 = self.cellForRowAtIndexPath(tableView, cell, indexPath);
-        if (cell2) {
-            return cell2;
-        }
+    if ([self.dataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:)]) {
+        UITableViewCell * cell2 = [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell2;
+    }
+    
+    if (!cell) {
+        NSAssert(NO, @"cell为空");
     }
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    WZZDataTableViewModel * model = self.dataArrf[indexPath.row];
-    if (model.onClick) {
-        model.onClick(model);
+    CGFloat height = -1;
+    if ([self.delegate respondsToSelector:@selector(tableView:estimatedHeightForRowAtIndexPath:)]) {
+        height = [self.delegate tableView:tableView estimatedHeightForRowAtIndexPath:indexPath];
     }
+    return (height >= 0)?height:44;
 }
 
 @end

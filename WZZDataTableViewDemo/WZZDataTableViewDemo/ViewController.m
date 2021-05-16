@@ -39,6 +39,16 @@
         t1.aTitle = [NSString stringWithFormat:@"这个是标题%d", i];
         [dataArr addObject:t1];
         [dataArr addObject:h1];
+        t1.onClick = ^(Test2Model *thisModel) {
+            NSLog(@"“%@”被点击啦", thisModel.aTitle);
+        };
+        
+        if (i%2 == 0) {
+            t1.isSectionHeader = YES;
+            t1.sectionHeaderHeight = 30;
+            t1.sectionHeaderReuse = YES;
+            t1.aTitle = [NSString stringWithFormat:@"这个是区头标题%d", i];
+        }
         
         for (int j = 0; j < 10; j++) {
             TestModel * m1 = [[TestModel alloc] init];
@@ -46,6 +56,9 @@
             m1.age = [NSString stringWithFormat:@"%d岁", j];
             m1.detail = arc4random()%2?@"我诶蚧佛额外i将否未婚夫iu未婚夫i无ehfuiwehfwieuhfiweuhfwieuhfiwuehf为UI回复i额u我回复为u富含维u凤凰网i额u和iu未婚夫为i额u符合iu未婚夫iu未婚夫":@"我诶蚧佛为i俄方将哦额和iu往何方";
             [dataArr addObject:m1];
+            m1.onClick = ^(TestModel * thisModel) {
+                NSLog(@"“%@”被点击啦", thisModel.name);
+            };
         }
     }
     

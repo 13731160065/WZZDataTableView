@@ -18,8 +18,10 @@
 
 /**
  cell点击
+ 
+ thisModel 本模型自己
  */
-@property (strong, nonatomic) void(^onClick)(WZZDataTableViewModel * thisModel);
+@property (strong, nonatomic) void(^onClick)(id thisModel);
 
 #pragma mark - 段头
 /// 段头
@@ -33,8 +35,5 @@
 
 /// cell是否复用
 @property (assign, nonatomic) BOOL cellNoReuse;
-
-/// 不复用段头，一般只读
-@property (strong, nonatomic) WZZDataTableViewCell * _reuseSectionHeader;
 
 @end
