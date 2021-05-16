@@ -47,6 +47,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.showsHorizontalScrollIndicator = NO;
     self.tableView.showsVerticalScrollIndicator = NO;
+    self.backgroundColor = [UIColor clearColor];
     [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.tableView attribute:NSLayoutAttributeTop multiplier:1 constant:0].active = YES;
     [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.tableView attribute:NSLayoutAttributeBottom multiplier:1 constant:0].active = YES;
     [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.tableView attribute:NSLayoutAttributeLeft multiplier:1 constant:0].active = YES;
@@ -59,6 +60,11 @@
 
 - (void)registerCodeCell:(Class)cellClass model:(Class)modelClass {
     [self.tableView registerClass:cellClass forCellReuseIdentifier:NSStringFromClass(modelClass)];
+}
+
+- (void)reloadData:(NSArray<WZZDataTableViewModel *> *)dataArr {
+    [self setDataArr:dataArr];
+    [self.tableView reloadData];
 }
 
 - (void)reloadData {

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface WZZDataTableViewModel : NSObject
 
@@ -19,5 +20,21 @@
  cell点击
  */
 @property (strong, nonatomic) void(^onClick)(WZZDataTableViewModel * thisModel);
+
+#pragma mark - 段头
+/// 段头
+@property (assign, nonatomic) BOOL isSectionHeader;
+
+/// 段头高度
+@property (assign, nonatomic) CGFloat sectionHeaderHeight;
+
+/// 段头是否复用
+@property (assign, nonatomic) BOOL sectionHeaderReuse;
+
+/// cell是否复用
+@property (assign, nonatomic) BOOL cellNoReuse;
+
+/// 不复用段头，一般只读
+@property (strong, nonatomic) WZZDataTableViewCell * _reuseSectionHeader;
 
 @end

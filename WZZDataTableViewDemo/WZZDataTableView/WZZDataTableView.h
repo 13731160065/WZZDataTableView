@@ -42,6 +42,10 @@
  */
 - (void)reloadData;
 
+/// 刷新数据
+/// @param dataArr 数据数组
+- (void)reloadData:(NSArray<WZZDataTableViewModel *> *)dataArr;
+
 /**
  设置数据
  
