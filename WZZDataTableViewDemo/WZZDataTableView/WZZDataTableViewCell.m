@@ -81,7 +81,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if ([self.tfDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
-        return [self.tfDelegate textFieldShouldEndEditing:textField];
+        return [self.tfDelegate textFieldShouldBeginEditing:textField];
     }
     return YES;
 }
