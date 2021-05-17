@@ -68,7 +68,7 @@
 
 - (void)reloadData:(NSArray<WZZDataTableViewModel *> *)dataArr {
     [self setDataArr:dataArr];
-    [self.tableView reloadData];
+    [self reloadData];
 }
 
 - (void)reloadData {
