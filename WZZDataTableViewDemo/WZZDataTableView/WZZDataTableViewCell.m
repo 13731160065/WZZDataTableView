@@ -58,7 +58,11 @@
 
 - (void)cellWithModel:(WZZDataTableViewModel *)model {
     _model = model;
-    self.upButton.hidden = !model.onClick;
+    if (model.isSectionHeader) {
+        self.upButton.hidden = !model.onClick;
+    } else {
+        self.upButton.hidden = YES;
+    }
 }
 
 #pragma mark - 绑定输入

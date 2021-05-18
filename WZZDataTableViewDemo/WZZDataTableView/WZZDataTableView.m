@@ -189,4 +189,12 @@
     return (height >= 0)?height:44;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSMutableArray * subArr = self.sectionDataArr[indexPath.section][@"dataArr"];
+    WZZDataTableViewModel * model = subArr[indexPath.row];
+    if (model.onClick) {
+        model.onClick(model);
+    }
+}
+
 @end
