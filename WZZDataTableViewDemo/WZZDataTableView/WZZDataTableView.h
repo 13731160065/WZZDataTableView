@@ -23,6 +23,12 @@
 /**
  注册cell
  
+ 通用注册方法，可以注册xib和纯代码创建的cell
+
+ 也可以不注册，类名按以下规则，tableview即可自动找到对应的cell完成注册
+ xxxxxModel
+ xxxxxCell
+ 
  @param cellClass cell
  @param modelClass 模型
  */

@@ -59,7 +59,12 @@
 }
 
 - (void)registerCell:(Class)cellClass model:(Class)modelClass {
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil] forCellReuseIdentifier:NSStringFromClass(modelClass)];
+    UINib * nib = [UINib nibWithNibName:NSStringFromClass(cellClass) bundle:nil];
+    if (nib) {
+        [self.tableView registerNib:nib forCellReuseIdentifier:NSStringFromClass(modelClass)];
+    } else {
+        [self registerCodeCell:cellClass model:modelClass];
+    }
 }
 
 - (void)registerCodeCell:(Class)cellClass model:(Class)modelClass {
@@ -100,6 +105,27 @@
 
 - (void)setDataArr:(NSArray<WZZDataTableViewModel *> *)dataArr {
     self.dataArrf = [NSMutableArray arrayWithArray:dataArr];
+    for (WZZDataTableViewModel * model in dataArr) {
+        WZZDataTableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
+        if (!cell) {
+            //未注册
+            NSString * string = NSStringFromClass(model.class);
+            if (string) {
+                NSRegularExpression * reg = [NSRegularExpression regularExpressionWithPattern:@"(.*)Model$" options:NSRegularExpressionCaseInsensitive error:nil];
+                //正则检索
+                NSTextCheckingResult * res = [reg firstMatchInString:string options:NSMatchingReportProgress range:NSMakeRange(0, string.length)];
+                NSRange range = [res rangeAtIndex:1];
+                @try {
+                    NSString * nameStr = [string substringWithRange:range];
+                    NSString * cellStr = [NSString stringWithFormat:@"%@Cell", nameStr];
+                    Class cellClass = NSClassFromString(cellStr);
+                    [self registerCell:cellClass model:model.class];
+                } @catch (NSException *exception) {
+                    
+                }
+            }
+        }
+    }
 }
 
 #pragma mark - tableview代理
