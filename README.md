@@ -154,3 +154,25 @@ ViewController.m
 @end
 ```
 
+## 学习更多
+
+* `WZZDataTableViewModel`类属性`onClick`是一个点击事件回调，当触发cell点击事件的时候会调用该回调响应给开发者。
+
+* `WZZDataTableViewModel`类属性`extObj`是一个预留属性，开发者可以让该model携带任何数据。
+
+* `WZZDataTableViewModel`类属性`isSectionHeader`设置为`YES`时这个cell将被作为tableView的tableHeaderView，而且需要设置`sectionHeaderHeight`头部高度。该段头有头部保留效果。`sectionHeaderReuse`默认为`NO`不复用。
+
+* `WZZDataTableViewModel`类属性`cellNoReuse`设置为`YES`时cell将不复用，每一个model单独创建一个cell，可以用来处理特殊的视图。
+
+* 输入框可以使用cell的绑定方法，将输入框和model的某个属性绑定，绑定后输入框结束编辑方法调用时会将输入框的`text`赋值给model的对应属性。
+
+  ```objective-c
+  /// 绑定输入框，输入后同步到模型对应keyPath中
+  /// @param textField 输入框
+  /// @param modelKeyPath 模型keyPath
+  - (void)bindingTextField:(UITextField *)textField
+              modelKeyPath:(NSString *)modelKeyPath;
+  ```
+
+* 本仓库中自带一个`WZZHolderCell`和`WZZHolderModel`，用于填充设置空白高度
+
