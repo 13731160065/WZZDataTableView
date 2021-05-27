@@ -38,7 +38,7 @@ WZZDataTableView * mainTableView = [[WZZDataTableView alloc] init];
 
 *当然也可以拖出一个普通`UIView`来用纯代码的方式创建*
 
-[img](./image/img0.png)
+![img](https://raw.githubusercontent.com/13731160065/WZZDataTableView/main/Image/img0.png)
 
 2. 注册cell
 
