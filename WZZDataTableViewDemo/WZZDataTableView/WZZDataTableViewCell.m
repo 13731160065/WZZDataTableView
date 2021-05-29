@@ -84,27 +84,27 @@
 #pragma mark - tf代理
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if ([self.tfDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
+    if (textField.delegate != self.tfDelegate && [self.tfDelegate respondsToSelector:@selector(textFieldShouldBeginEditing:)]) {
         return [self.tfDelegate textFieldShouldBeginEditing:textField];
     }
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if ([self.tfDelegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
+    if (textField.delegate != self.tfDelegate && [self.tfDelegate respondsToSelector:@selector(textFieldDidBeginEditing:)]) {
         [self.tfDelegate textFieldDidBeginEditing:textField];
     }
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    if ([self.tfDelegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
+    if (textField.delegate != self.tfDelegate && [self.tfDelegate respondsToSelector:@selector(textFieldShouldEndEditing:)]) {
         return [self.tfDelegate textFieldShouldEndEditing:textField];
     }
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if ([self.tfDelegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
+    if (textField.delegate != self.tfDelegate && [self.tfDelegate respondsToSelector:@selector(textFieldDidEndEditing:)]) {
         [self.tfDelegate textFieldDidEndEditing:textField];
     }
     NSString * keyPath = objc_getAssociatedObject(textField, "WZZInputBindingCell_modelKeyPath");
@@ -116,21 +116,21 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([self.tfDelegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
+    if (textField.delegate != self.tfDelegate && [self.tfDelegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
         return [self.tfDelegate textField:textField shouldChangeCharactersInRange:range replacementString:string];
     }
     return YES;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
-    if ([self.tfDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
+    if (textField.delegate != self.tfDelegate && [self.tfDelegate respondsToSelector:@selector(textFieldShouldClear:)]) {
         return [self.tfDelegate textFieldShouldClear:textField];
     }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if ([self.tfDelegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
+    if (textField.delegate != self.tfDelegate && [self.tfDelegate respondsToSelector:@selector(textFieldShouldReturn:)]) {
         return [self.tfDelegate textFieldShouldReturn:textField];
     }
     return YES;
@@ -139,27 +139,27 @@
 #pragma mark - tv代理
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    if ([self.tvDelegate respondsToSelector:@selector(textViewShouldBeginEditing:)]) {
+    if (textView.delegate != self.tvDelegate && [self.tvDelegate respondsToSelector:@selector(textViewShouldBeginEditing:)]) {
         return [self.tvDelegate textViewShouldBeginEditing:textView];
     }
     return YES;
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    if ([self.tvDelegate respondsToSelector:@selector(textViewShouldEndEditing:)]) {
+    if (textView.delegate != self.tvDelegate && [self.tvDelegate respondsToSelector:@selector(textViewShouldEndEditing:)]) {
         return [self.tvDelegate textViewShouldEndEditing:textView];
     }
     return YES;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    if ([self.tvDelegate respondsToSelector:@selector(textViewDidBeginEditing:)]) {
+    if (textView.delegate != self.tvDelegate && [self.tvDelegate respondsToSelector:@selector(textViewDidBeginEditing:)]) {
         [self.tvDelegate textViewDidBeginEditing:textView];
     }
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    if ([self.tvDelegate respondsToSelector:@selector(textViewDidEndEditing:)]) {
+    if (textView.delegate != self.tvDelegate && [self.tvDelegate respondsToSelector:@selector(textViewDidEndEditing:)]) {
         [self.tvDelegate textViewDidEndEditing:textView];
     }
     NSString * keyPath = objc_getAssociatedObject(textView, "WZZInputBindingCell_modelKeyPath");
@@ -171,20 +171,20 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([self.tvDelegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
+    if (textView.delegate != self.tvDelegate && [self.tvDelegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
         return [self.tvDelegate textView:textView shouldChangeTextInRange:range replacementText:text];
     }
     return YES;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    if ([self.tvDelegate respondsToSelector:@selector(textViewDidChange:)]) {
+    if (textView.delegate != self.tvDelegate && [self.tvDelegate respondsToSelector:@selector(textViewDidChange:)]) {
         [self.tvDelegate textViewDidChange:textView];
     }
 }
 
 - (void)textViewDidChangeSelection:(UITextView *)textView {
-    if ([self.tvDelegate respondsToSelector:@selector(textViewDidChangeSelection:)]) {
+    if (textView.delegate != self.tvDelegate && [self.tvDelegate respondsToSelector:@selector(textViewDidChangeSelection:)]) {
         [self.tvDelegate textViewDidChangeSelection:textView];
     }
 }
