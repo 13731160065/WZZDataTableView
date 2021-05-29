@@ -23,7 +23,7 @@
     
     [self.mainTableView registerCell:[TestCell class] model:[TestModel class]];
     [self.mainTableView registerCell:[Test2Cell class] model:[Test2Model class]];
-    [self.mainTableView registerCell:[WZZHolderCell class] model:[WZZHolderModel class]];
+//    [self.mainTableView registerCell:[WZZHolderCell class] model:[WZZHolderModel class]];
     
     [self loadData];
 }
