@@ -11,6 +11,9 @@
 
 @interface WZZDataTableViewModel : NSObject
 
+/// model别名，方便在外部通过tableview获取
+@property (strong, nonatomic) NSString * cellNickName;
+
 /**
  扩展字段，可以用来携带数据
  */
