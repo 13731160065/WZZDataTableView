@@ -23,17 +23,18 @@
  */
 @property (strong, nonatomic) void(^onClick)(id thisModel);
 
-#pragma mark - 段头
 /// 段头
 @property (assign, nonatomic) BOOL isSectionHeader;
 
-/// 段头高度
-@property (assign, nonatomic) CGFloat sectionHeaderHeight;
+/// cell不复用名称
+/// cell将会根据该名称进行复用，不同名称之间不会互相复用，方便不需要服用视图的逻辑处理。
+/// 例如：banner类视图、segment类、绘图类视图等
+@property (strong, nonatomic) NSString * noReuseName;
 
-/// 段头是否复用
-@property (assign, nonatomic) BOOL sectionHeaderReuse;
+#pragma mark - 其他
 
-/// cell是否复用
-@property (assign, nonatomic) BOOL cellNoReuse;
+/// 刷新tableView
+/// 方便在cell中写刷新tableview逻辑
+- (void)reloadTableView;
 
 @end

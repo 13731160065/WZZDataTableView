@@ -7,7 +7,15 @@
 //
 
 #import "WZZDataTableViewModel.h"
+#import <objc/runtime.h>
 
 @implementation WZZDataTableViewModel
+
+- (void)reloadTableView {
+    void(^reloadTableViewBlock)(void) = objc_getAssociatedObject(self, "WZZInputBindingCell_reloadTableViewBlock");
+    if (reloadTableViewBlock) {
+        reloadTableViewBlock();
+    }
+}
 
 @end

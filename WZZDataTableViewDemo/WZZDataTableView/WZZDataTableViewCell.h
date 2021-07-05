@@ -31,11 +31,5 @@
 - (void)bindingTextField:(UITextField *)textField
             modelKeyPath:(NSString *)modelKeyPath;
 
-/// 绑定输入框，输入后同步到模型对应keyPath中
-/// @param textView 输入框
-/// @param modelKeyPath 模型keyPath
-- (void)bindingTextView:(UITextView *)textView
-           modelKeyPath:(NSString *)modelKeyPath;
-
 @end
 

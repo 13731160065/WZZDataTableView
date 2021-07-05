@@ -77,10 +77,14 @@
 }
 
 - (void)reloadData {
+    __weak WZZDataTableView * weakSelf = self;
     self.sectionDataArr = [NSMutableArray array];
     NSMutableArray * currentArr;
     for (int i = 0; i < self.dataArrf.count; i++) {
         WZZDataTableViewModel * item = self.dataArrf[i];
+        objc_setAssociatedObject(item, "WZZInputBindingCell_reloadTableViewBlock", ^{
+            [weakSelf reloadData];
+        }, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         
         if (item.isSectionHeader) {
             NSMutableDictionary * hh = [NSMutableDictionary dictionary];
@@ -105,6 +109,8 @@
 
 - (void)setDataArr:(NSArray<WZZDataTableViewModel *> *)dataArr {
     self.dataArrf = [NSMutableArray arrayWithArray:dataArr];
+    
+    //注册cell
     for (WZZDataTableViewModel * model in dataArr) {
         WZZDataTableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
         if (!cell) {
@@ -144,28 +150,19 @@
     return self.sectionDataArr.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    WZZDataTableViewModel * model = self.sectionDataArr[section][@"header"];
-    if ([self.delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
-        [self.delegate tableView:tableView heightForHeaderInSection:section];
-    }
-    return model.sectionHeaderHeight;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    WZZDataTableViewModel * model = self.sectionDataArr[section][@"header"];
+//    if ([self.delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
+//        [self.delegate tableView:tableView heightForHeaderInSection:section];
+//    }
+//    return model.sectionHeaderHeight;
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     WZZDataTableViewModel * model = self.sectionDataArr[section][@"header"];
     WZZDataTableViewCell * cell;
-    if (model.sectionHeaderReuse) {
-        cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
-        [cell cellWithModel:model];
-    } else {
-        cell = objc_getAssociatedObject(model, "WZZDataTableViewModel_reuseSectionHeader");
-        if (!cell) {
-            cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
-            objc_setAssociatedObject(model, "WZZDataTableViewModel_reuseSectionHeader", cell, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        }
-        [cell cellWithModel:model];
-    }
+    cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
+    [cell cellWithModel:model];
     
     if ([self.dataSource respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
         [self.delegate tableView:tableView viewForHeaderInSection:section];
@@ -187,8 +184,10 @@
     WZZDataTableViewModel * model = subArr[indexPath.row];
     
     NSString * cid = NSStringFromClass(model.class);
-    if (model.cellNoReuse) {
-        [cid stringByAppendingFormat:@"%zd,%zd", indexPath.section, indexPath.row];
+    
+    
+    if (model.noReuseName) {
+        [cid stringByAppendingFormat:@"%@", model.noReuseName];
     }
     WZZDataTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cid];
     
