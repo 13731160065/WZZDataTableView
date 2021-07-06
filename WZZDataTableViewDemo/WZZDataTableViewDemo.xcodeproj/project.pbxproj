@@ -28,6 +28,7 @@
 		5207050D26462FA400A3E3A8 /* Test2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5207050B26462FA400A3E3A8 /* Test2Cell.m */; };
 		5207050E26462FA400A3E3A8 /* Test2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5207050C26462FA400A3E3A8 /* Test2Cell.xib */; };
 		5207051426462FB100A3E3A8 /* Test2Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5207051326462FB100A3E3A8 /* Test2Model.m */; };
+		52D559F92693EEC30002BF6A /* WZZDataTableViewUnionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D559F82693EEC30002BF6A /* WZZDataTableViewUnionModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,8 @@
 		5207050C26462FA400A3E3A8 /* Test2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Test2Cell.xib; sourceTree = "<group>"; };
 		5207051226462FB100A3E3A8 /* Test2Model.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test2Model.h; sourceTree = "<group>"; };
 		5207051326462FB100A3E3A8 /* Test2Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test2Model.m; sourceTree = "<group>"; };
+		52D559F72693EEC30002BF6A /* WZZDataTableViewUnionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WZZDataTableViewUnionModel.h; sourceTree = "<group>"; };
+		52D559F82693EEC30002BF6A /* WZZDataTableViewUnionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WZZDataTableViewUnionModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +193,8 @@
 				520704E326462D5200A3E3A8 /* WZZDataTableViewCell.m */,
 				520704DF26462D5200A3E3A8 /* WZZDataTableViewModel.h */,
 				520704E526462D5200A3E3A8 /* WZZDataTableViewModel.m */,
+				52D559F72693EEC30002BF6A /* WZZDataTableViewUnionModel.h */,
+				52D559F82693EEC30002BF6A /* WZZDataTableViewUnionModel.m */,
 				520704DC26462D5200A3E3A8 /* WZZHolderCell.h */,
 				520704E126462D5200A3E3A8 /* WZZHolderCell.m */,
 				520704DE26462D5200A3E3A8 /* WZZHolderCell.xib */,
@@ -342,6 +347,7 @@
 				5207049B26462D0F00A3E3A8 /* AppDelegate.m in Sources */,
 				5207051426462FB100A3E3A8 /* Test2Model.m in Sources */,
 				520704EB26462D5200A3E3A8 /* WZZHolderModel.m in Sources */,
+				52D559F92693EEC30002BF6A /* WZZDataTableViewUnionModel.m in Sources */,
 				520704AC26462D1100A3E3A8 /* main.m in Sources */,
 				5207049E26462D0F00A3E3A8 /* SceneDelegate.m in Sources */,
 			);

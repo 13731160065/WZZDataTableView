@@ -12,6 +12,7 @@
 @interface WZZDataTableView ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray <WZZDataTableViewModel *>* dataArrf;
+@property (strong, nonatomic) NSMutableDictionary <NSString *, WZZDataTableViewModel *>* nickNameMappingDic;
 @property (strong, nonatomic) NSMutableArray <NSMutableDictionary *>* sectionDataArr;
 
 @end
@@ -107,11 +108,24 @@
     [self.tableView reloadData];
 }
 
+/// 根据昵称获取模型，如果有多个，返回第一个
+/// @param nickName 昵称
+- (WZZDataTableViewModel *)modelWithNickName:(NSString *)nickName {
+    if (nickName) {
+        return self.nickNameMappingDic[nickName];
+    }
+    return nil;
+}
+
 - (void)setDataArr:(NSArray<WZZDataTableViewModel *> *)dataArr {
     self.dataArrf = [NSMutableArray arrayWithArray:dataArr];
+    self.nickNameMappingDic = [NSMutableDictionary dictionary];
     
     //注册cell
     for (WZZDataTableViewModel * model in dataArr) {
+        if (model.cellNickName) {
+            self.nickNameMappingDic[model.cellNickName] = model;
+        }
         WZZDataTableViewCell * cell = [self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass(model.class)];
         if (!cell) {
             //未注册
