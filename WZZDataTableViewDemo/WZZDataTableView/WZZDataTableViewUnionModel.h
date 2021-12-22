@@ -12,9 +12,5 @@
 
 @property (strong, nonatomic) NSMutableArray * subModels;
 
-/// 初始化模型
-/// @param config 配置
-- (void)setupWithSubModelsConfig:(void(^)(WZZDataTableViewUnionModel *thisModel, NSMutableArray * subModelsArr))config;
-
 @end
 

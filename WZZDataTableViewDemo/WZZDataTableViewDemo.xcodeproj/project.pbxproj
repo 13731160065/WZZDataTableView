@@ -29,6 +29,10 @@
 		5207050E26462FA400A3E3A8 /* Test2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5207050C26462FA400A3E3A8 /* Test2Cell.xib */; };
 		5207051426462FB100A3E3A8 /* Test2Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5207051326462FB100A3E3A8 /* Test2Model.m */; };
 		52D559F92693EEC30002BF6A /* WZZDataTableViewUnionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 52D559F82693EEC30002BF6A /* WZZDataTableViewUnionModel.m */; };
+		7199991E2695E94200512DEE /* TestHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7199991C2695E94200512DEE /* TestHeadCell.m */; };
+		7199991F2695E94200512DEE /* TestHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7199991D2695E94200512DEE /* TestHeadCell.xib */; };
+		719999262695E95A00512DEE /* TestContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 719999242695E95A00512DEE /* TestContentCell.m */; };
+		719999272695E95A00512DEE /* TestContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 719999252695E95A00512DEE /* TestContentCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +94,12 @@
 		5207051326462FB100A3E3A8 /* Test2Model.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test2Model.m; sourceTree = "<group>"; };
 		52D559F72693EEC30002BF6A /* WZZDataTableViewUnionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WZZDataTableViewUnionModel.h; sourceTree = "<group>"; };
 		52D559F82693EEC30002BF6A /* WZZDataTableViewUnionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WZZDataTableViewUnionModel.m; sourceTree = "<group>"; };
+		7199991B2695E94200512DEE /* TestHeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestHeadCell.h; sourceTree = "<group>"; };
+		7199991C2695E94200512DEE /* TestHeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestHeadCell.m; sourceTree = "<group>"; };
+		7199991D2695E94200512DEE /* TestHeadCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestHeadCell.xib; sourceTree = "<group>"; };
+		719999232695E95A00512DEE /* TestContentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestContentCell.h; sourceTree = "<group>"; };
+		719999242695E95A00512DEE /* TestContentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestContentCell.m; sourceTree = "<group>"; };
+		719999252695E95A00512DEE /* TestContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestContentCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +167,12 @@
 				5207050226462DEE00A3E3A8 /* TestCell.h */,
 				5207050326462DEE00A3E3A8 /* TestCell.m */,
 				5207050426462DEE00A3E3A8 /* TestCell.xib */,
+				7199991B2695E94200512DEE /* TestHeadCell.h */,
+				7199991C2695E94200512DEE /* TestHeadCell.m */,
+				7199991D2695E94200512DEE /* TestHeadCell.xib */,
+				719999232695E95A00512DEE /* TestContentCell.h */,
+				719999242695E95A00512DEE /* TestContentCell.m */,
+				719999252695E95A00512DEE /* TestContentCell.xib */,
 				520704A226462D1000A3E3A8 /* Main.storyboard */,
 				520704A526462D1100A3E3A8 /* Assets.xcassets */,
 				520704A726462D1100A3E3A8 /* LaunchScreen.storyboard */,
@@ -311,7 +327,9 @@
 				520704A426462D1000A3E3A8 /* Main.storyboard in Resources */,
 				5207050626462DEE00A3E3A8 /* TestCell.xib in Resources */,
 				5207050E26462FA400A3E3A8 /* Test2Cell.xib in Resources */,
+				7199991F2695E94200512DEE /* TestHeadCell.xib in Resources */,
 				520704E826462D5200A3E3A8 /* WZZHolderCell.xib in Resources */,
+				719999272695E95A00512DEE /* TestContentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,12 +354,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7199991E2695E94200512DEE /* TestHeadCell.m in Sources */,
 				520704EA26462D5200A3E3A8 /* WZZDataTableViewCell.m in Sources */,
 				5207050526462DEE00A3E3A8 /* TestCell.m in Sources */,
 				520704E726462D5200A3E3A8 /* WZZDataTableView.m in Sources */,
 				520704FB26462DDC00A3E3A8 /* TestModel.m in Sources */,
 				520704E926462D5200A3E3A8 /* WZZHolderCell.m in Sources */,
 				520704A126462D1000A3E3A8 /* ViewController.m in Sources */,
+				719999262695E95A00512DEE /* TestContentCell.m in Sources */,
 				520704EC26462D5200A3E3A8 /* WZZDataTableViewModel.m in Sources */,
 				5207050D26462FA400A3E3A8 /* Test2Cell.m in Sources */,
 				5207049B26462D0F00A3E3A8 /* AppDelegate.m in Sources */,
