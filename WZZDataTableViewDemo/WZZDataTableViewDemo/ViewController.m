@@ -39,10 +39,10 @@
             NSLog(@"“%@”被点击啦", thisModel.aTitle);
         };
         
-        if (i%2 == 0) {
-            t1.isSectionHeader = YES;
-            t1.aTitle = [NSString stringWithFormat:@"这个是区头标题wefweoifoiwehouewhuiwehfiuewhiuewfhiuwefhiuewhfiuwefhiuewhweiufhuiwefhiuwefhuiwehf%d", i];
-        }
+//        if (i%2 == 0) {
+//            t1.isSectionHeader = YES;
+//            t1.aTitle = [NSString stringWithFormat:@"这个是区头标题wefweoifoiwehouewhuiwehfiuewhiuewfhiuwefhiuewhfiuwefhiuewhweiufhuiwefhiuwefhuiwehf%d", i];
+//        }
         
         for (int j = 0; j < 10; j++) {
             TestModel * m1 = [[TestModel alloc] init];

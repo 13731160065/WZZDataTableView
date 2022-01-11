@@ -7,6 +7,10 @@
 
 #import "WZZDataTableViewCell.h"
 
+@interface TestContentModel : WZZDataTableViewModel
+
+@end
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TestContentCell : WZZDataTableViewCell

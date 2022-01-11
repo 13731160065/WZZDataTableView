@@ -43,6 +43,7 @@
 - (void)setup {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero];
     [self addSubview:self.tableView];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -57,6 +58,26 @@
     [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.tableView attribute:NSLayoutAttributeRight multiplier:1 constant:0].active = YES;
     
     self.tableView.estimatedRowHeight = 44;
+    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        [self currentVC].automaticallyAdjustsScrollViewInsets = NO;
+    }
+    self.tableView.contentInset = UIEdgeInsetsZero;
+    [self currentVC].edgesForExtendedLayout = UIRectEdgeNone;
+}
+
+- (UIViewController *)currentVC {
+    UIResponder * nextResponder = self;
+    do {
+        nextResponder = [nextResponder nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    } while (nextResponder);
+    
+    return nil;
 }
 
 - (void)registerCell:(Class)cellClass model:(Class)modelClass {
@@ -81,6 +102,7 @@
     __weak WZZDataTableView * weakSelf = self;
     self.sectionDataArr = [NSMutableArray array];
     NSMutableArray * currentArr;
+    self.tableView.estimatedSectionHeaderHeight = 0;
     for (int i = 0; i < self.dataArrf.count; i++) {
         WZZDataTableViewModel * item = self.dataArrf[i];
         objc_setAssociatedObject(item, "WZZInputBindingCell_reloadTableViewBlock", ^{
@@ -93,6 +115,7 @@
             currentArr = [NSMutableArray array];
             hh[@"dataArr"] = currentArr;
             [self.sectionDataArr addObject:hh];
+            self.tableView.estimatedSectionHeaderHeight = 44;
             continue;
         } else {
             if (i == 0) {
@@ -233,6 +256,12 @@
     WZZDataTableViewModel * model = subArr[indexPath.row];
     if (model.onClick) {
         model.onClick(model);
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if ([self.delegate respondsToSelector:@selector(scrollViewDidScroll:)]) {
+        [self.delegate scrollViewDidScroll:scrollView];
     }
 }
 

@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "WZZDataTableView"
-  s.version      = "1.0.8"
+  s.version      = "1.0.9"
   s.summary      = "WZZDataTableView是一个数据驱动的tableview"
 
   # This description is used to generate tags and improve search results.
