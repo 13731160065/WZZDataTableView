@@ -133,7 +133,7 @@
 
 /// 根据昵称获取模型，如果有多个，返回第一个
 /// @param nickName 昵称
-- (WZZDataTableViewModel *)modelWithNickName:(NSString *)nickName {
+- (id)modelWithNickName:(NSString *)nickName {
     if (nickName) {
         return self.nickNameMappingDic[nickName];
     }
