@@ -66,6 +66,12 @@
     }
     self.tableView.contentInset = UIEdgeInsetsZero;
     [self currentVC].edgesForExtendedLayout = UIRectEdgeNone;
+    
+    if (@available(iOS 15.0, *)) {
+        self.tableView.sectionHeaderTopPadding = 0;
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 - (UIViewController *)currentVC {
